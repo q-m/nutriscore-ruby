@@ -7,6 +7,9 @@ the European Union the _Nutri-Score_ in several countries.
 This gem implements the Nutri-Score for Ruby and includes adaptations for different
 countries. The maintainer would be open to integrating other nutritional scores as well.
 
+_**Note:** this is currently under development, the API may change without notice,
+and scoring has not yet been fully verified. Be very careful using this in production._
+
 ## Nutri-Score
 
 There are currently two versions of the Nutri-Score in use. The first was
