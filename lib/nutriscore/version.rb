@@ -1,4 +1,4 @@
 module Nutriscore
-  VERSION      = '0.0.1'
-  VERSION_DATE = '2019-06-24'
+  VERSION      = '0.2.0'
+  VERSION_DATE = '2021-06-07'
 end
