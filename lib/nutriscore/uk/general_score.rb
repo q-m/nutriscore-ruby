@@ -1,7 +1,7 @@
 require_relative '../common/nutrients'
+require_relative 'concerns/general_less_healthy'
 require_relative 'positive_score'
 require_relative 'negative_score'
-require_relative 'concerns/general_less_healthy'
 
 module Nutriscore
   module UK
@@ -21,9 +21,7 @@ module Nutriscore
       end
 
       def score
-        if (negative = @negative.score) && (positive = @positive.score)
-          negative - positive
-        end
+        @negative.score - @positive.score
       end
 
       def inspect

@@ -6,8 +6,8 @@ describe Nutriscore::FR::SpecificScore do
 
   context 'without any nutrients' do
     let(:nutrients) { {} }
-    its(:score) { is_expected.to be nil }
-    its(:score_class) { is_expected.to be nil }
+    its('score.single') { is_expected.to be nil }
+    its('score_class.single') { is_expected.to be nil }
   end
 
   # example from "Nutrient Profiling Technical Guidance January 2011" page 14

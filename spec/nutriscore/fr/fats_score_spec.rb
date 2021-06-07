@@ -6,14 +6,14 @@ describe Nutriscore::FR::FatsScore do
 
   context 'without any nutrients' do
     let(:nutrients) { {} }
-    its(:score) { is_expected.to be nil }
-    its(:score_class) { is_expected.to be nil }
+    its('score.single') { is_expected.to be nil }
+    its('score_class.single') { is_expected.to be nil }
   end
 
   context 'with a missing nutrient' do
     let(:nutrients) { { fat_total: 100 } }
-    its(:score) { is_expected.to be nil }
-    its(:score_class) { is_expected.to be nil }
+    its('score.single') { is_expected.to be nil }
+    its('score_class.single') { is_expected.to be nil }
   end
 
   context 'with saturated fat half of total fat' do

@@ -1,4 +1,5 @@
 require_relative 'nutrients'
+require_relative 'range'
 
 module Nutriscore
   module Common
@@ -10,7 +11,7 @@ module Nutriscore
       end
 
       def score
-        self.class.nutrient_keys.map(&method(:public_send)).compact.reduce(&:+)
+        self.class.nutrient_keys.map(&method(:public_send)).reduce(&:+)
       end
 
       def initialize(nutrients)
@@ -22,6 +23,14 @@ module Nutriscore
       end
 
       private
+
+      def score_value(value, extremes)
+        if value.nil?
+          Range.wrap(extremes)
+        else
+          Range.new(yield(value.min), yield(value.max))
+        end
+      end
 
       def inspect_nutrients
         self.class.nutrient_keys.map do |key|

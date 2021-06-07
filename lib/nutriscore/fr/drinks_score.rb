@@ -12,48 +12,48 @@ module Nutriscore
       end
 
       def energy
-        value = @nutrients.energy
-        if   !value        then nil
-        elsif value ==   0 then  0
-        elsif value <=  30 then  1
-        elsif value <=  60 then  2
-        elsif value <=  90 then  3
-        elsif value <= 120 then  4
-        elsif value <= 150 then  5
-        elsif value <= 180 then  6
-        elsif value <= 210 then  7
-        elsif value <= 240 then  8
-        elsif value <= 270 then  9
-        else                    10
+        score_value(@nutrients.energy, 0..10) do |v|
+          if    v ==   0 then  0
+          elsif v <=  30 then  1
+          elsif v <=  60 then  2
+          elsif v <=  90 then  3
+          elsif v <= 120 then  4
+          elsif v <= 150 then  5
+          elsif v <= 180 then  6
+          elsif v <= 210 then  7
+          elsif v <= 240 then  8
+          elsif v <= 270 then  9
+          else                10
+          end
         end
       end
 
       def sugar
-        value = @nutrients.sugar
-        if   !value        then nil
-        elsif value == 0   then  0
-        elsif value <  1.5 then  1
-        elsif value <  3   then  2
-        elsif value <  4.5 then  3
-        elsif value <  6   then  4
-        elsif value <  7.5 then  5
-        elsif value <  9   then  6
-        elsif value < 10.5 then  7
-        elsif value < 12   then  8
-        elsif value < 13.5 then  9
-        else                    10
+        score_value(@nutrients.sugar, 0..10) do |v|
+          if    v == 0   then  0
+          elsif v <  1.5 then  1
+          elsif v <  3   then  2
+          elsif v <  4.5 then  3
+          elsif v <  6   then  4
+          elsif v <  7.5 then  5
+          elsif v <  9   then  6
+          elsif v < 10.5 then  7
+          elsif v < 12   then  8
+          elsif v < 13.5 then  9
+          else                    10
+          end
         end
       end
 
       def fruits_vegetables
         # the text mentions % but here we use g/100ml
         # we'd need to either ask for %, ask for g/100g, or require a density ...
-        value = @nutrients.fruits_vegetables
-        if   !value   then nil
-        elsif value > 80 then 10
-        elsif value > 60 then  4
-        elsif value > 40 then  2
-        else                   0
+        score_value(@nutrients.fruits_vegetables, 0..10) do |v|
+          if    v > 80 then 10
+          elsif v > 60 then  4
+          elsif v > 40 then  2
+          else                   0
+          end
         end
       end
     end

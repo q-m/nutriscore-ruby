@@ -1,18 +1,22 @@
 require_relative 'general_score'
+require_relative '../common/range'
 
 module Nutriscore
   module UK
     # this is for general products
     class SpecificScore < GeneralScore
       def score
-        score = super
         # 'If a food or drink scores 11 or more ‘A’ points then it cannot score points for protein
         #  unless it also scores 5 points for fruit, vegetables and nuts.'
-        if score && @negative.score >= 11 && @positive.fruits_vegetables_nuts < 5
-          # exclude protein score if there are not so much fruits(etc.)
-          score + @positive.proteins
+        if @negative.score.min < 11 || @positive.fruits_vegetables_nuts.max >= 5
+          @negative.score - @positive.score
+        elsif @negative.score.max >= 11 && @positive.fruits_vegetables_nuts.min < 5
+          @negative.score - @positive.score_without_proteins
         else
-          score
+          Range.new(
+            @negative.score.min - @positive.score.max,
+            @negative.score.max - @positive.score_without_proteins.min
+          )
         end
       end
     end

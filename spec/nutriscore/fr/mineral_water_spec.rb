@@ -6,7 +6,7 @@ describe Nutriscore::FR::MineralWaterScore do
 
   context 'without any nutrients' do
     let(:nutrients) { {} }
-    its(:score) { is_expected.to eq nil }
-    its(:score_class) { is_expected.to eq 'A' }
+    its('score.single') { is_expected.to eq nil }
+    its('score_class.single') { is_expected.to eq 'A' }
   end
 end

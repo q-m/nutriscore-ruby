@@ -60,11 +60,31 @@ score = Nutriscore::FR::SpecificScore.new(product_a)
 #                    fruits_vegetables_nuts=0 fibres=0 proteins=4>
 #  negative_score=#<Nutriscore::FR::NegativeScore score=4
 #                    energy=1 fat_saturated=1 sugar=2 sodium=0>>
-score.score
+score.score.single
 # => 0
-score.score_class
+score.score_class.single
 # => "B"
 ```
+
+To be able to work with incomplete information, results are returned as ranges.
+The use of `.single` in the above example converts these to a single value (it
+returns `nil` if there is not enough information to get a single result). The
+following example shows what happens when data is missing.
+
+```ruby
+score = Nutriscore::FR::SpecificScore.new(product_a.merge({ sodium: nil }))
+score.score
+# => 0..10
+score.score.single
+# => nil
+score.score_class
+# => "B".."C"
+score.score_class.single
+# => nil
+```
+
+Please only use `#single` and the regular Ruby `Range` methods on `#score` and `#score_class`.
+Other methods do exist, but are not guaranteed to be stable across releases.
 
 Different categories can use different score classes:
 * `Nutriscore::FR::CheeseScore` for cheese
@@ -76,22 +96,25 @@ Different categories can use different score classes:
 ## UK
 
 The UK has the same basis for computation, but it is used to determine
-whether a product can be advertised to children (it must not be less healthy).
+whether a product can be advertised (it must not be less healthy).
 
 ```ruby
-score = Nutriscore::EN::SpecificScore.new(product_a)
+score = Nutriscore::UK::SpecificScore.new(product_a)
 score.score
 # => 0
 score.less_healthy?
 # => false
 ```
 
+The method `#less_healthy?` is UK-specific, and returns `true`, `false`, or `nil`
+if there is not enough information to make a judgement.
+
 By default, the fibres measurement method is AOAC (which is preferred), but
 it is possible to use fibres values measured with the NSP method:
 
 ```ruby
 # Acceptable values for the fibres_method are: :aoac and :nsp.
-score = Nutriscore::EN::SpecificScore.new(product_a, fibres_method: :nsp)
+score = Nutriscore::UK::SpecificScore.new(product_a, fibres_method: :nsp)
 ```
 
 Different categories can use different score classes:

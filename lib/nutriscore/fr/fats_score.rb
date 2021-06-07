@@ -16,19 +16,19 @@ module Nutriscore
       end
 
       def fat_saturated
-        value = fat_saturated_pct
-        if   !value      then nil
-        elsif value < 10 then  0
-        elsif value < 16 then  1
-        elsif value < 22 then  2
-        elsif value < 28 then  3
-        elsif value < 34 then  4
-        elsif value < 40 then  5
-        elsif value < 46 then  6
-        elsif value < 52 then  7
-        elsif value < 58 then  8
-        elsif value < 64 then  9
-        else                  10
+        score_value(fat_saturated_pct, 0..10) do |v|
+          if    v < 10 then  0
+          elsif v < 16 then  1
+          elsif v < 22 then  2
+          elsif v < 28 then  3
+          elsif v < 34 then  4
+          elsif v < 40 then  5
+          elsif v < 46 then  6
+          elsif v < 52 then  7
+          elsif v < 58 then  8
+          elsif v < 64 then  9
+          else              10
+          end
         end
       end
 
@@ -37,7 +37,7 @@ module Nutriscore
       def fat_saturated_pct
         fat_saturated = @nutrients.fat_saturated
         fat_total = @nutrients.fat_total
-        100 * fat_saturated / fat_total if fat_saturated && fat_total
+        fat_saturated * 100 / fat_total if fat_saturated && fat_total
       end
     end
   end

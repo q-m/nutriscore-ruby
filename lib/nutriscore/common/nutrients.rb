@@ -1,3 +1,5 @@
+require_relative 'range'
+
 module Nutriscore
   module Common
     class Nutrients
@@ -11,7 +13,7 @@ module Nutriscore
       end
 
       def initialize(h)
-        @h = h
+        @h = h.transform_values {|v| v && Range.wrap(v) }
       end
 
       private
