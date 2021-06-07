@@ -1,5 +1,7 @@
 # Nutriscore
 
+[![Gem Version](https://badge.fury.io/rb/nutriscore.svg)](https://rubygems.org/gems/nutriscore)
+
 Consumer food products in some countries have a nutritional score, indicating
 how healthy the product is to eat. Each country has its own approach, but in
 the European Union the _Nutri-Score_ in several countries.
