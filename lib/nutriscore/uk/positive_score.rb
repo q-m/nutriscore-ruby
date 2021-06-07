@@ -1,8 +1,14 @@
 require_relative '../common/score'
 
 module Nutriscore
-  module FR
+  module UK
+    # This is called 'C'-points in the documentation
     class PositiveScore < Nutriscore::Common::Score
+
+      def initialize(nutrients, fibres_method: :aoac)
+        super(nutrients)
+        @fibres_method = fibres_method
+      end
 
       def self.nutrient_keys
         [:fruits_vegetables_nuts, :fibres, :proteins]
@@ -20,13 +26,24 @@ module Nutriscore
 
       def fibres
         value = @nutrients.fibres
-        if   !value       then nil
-        elsif value > 4.7 then 5
-        elsif value > 3.7 then 4
-        elsif value > 2.8 then 3
-        elsif value > 1.9 then 2
-        elsif value > 0.9 then 1
-        else                   0
+        if @fibres_method == :aoac
+          if   !value       then nil
+          elsif value > 4.7 then 5
+          elsif value > 3.7 then 4
+          elsif value > 2.8 then 3
+          elsif value > 1.9 then 2
+          elsif value > 0.9 then 1
+          else                   0
+          end
+        elsif @fibres_method == :nsp
+          if   !value       then nil
+          elsif value > 3.5 then 5
+          elsif value > 2.8 then 4
+          elsif value > 2.1 then 3
+          elsif value > 1.4 then 2
+          elsif value > 0.7 then 1
+          else                   0
+          end
         end
       end
 

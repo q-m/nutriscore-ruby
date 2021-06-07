@@ -44,20 +44,20 @@ require 'nutriscore'
 
 # Fruit fromage frais
 product_a = {
-  energy: 459,                       # kJ/100g
-  fat_saturated: 1.8,                #  g/100g
-  sugar: 13.4,                       #  g/100g
-  sodium: 0.1 / 1000,                #  g/100g
-  fruits_vegetables_legumes_nuts: 8, #  g/100g (= weight-%)
-  fibres: 0.6,                       #  g/100g
-  proteins: 6.5,                     #  g/100g
+  energy: 459,                 # kJ/100g
+  fat_saturated: 1.8,          #  g/100g
+  sugar: 13.4,                 #  g/100g
+  sodium: 0.1 / 1000,          #  g/100g
+  fruits_vegetables_nuts: 8,   #  g/100g (= weight-%)
+  fibres: 0.6,                 #  g/100g
+  proteins: 6.5,               #  g/100g
 }
 
 # Compute the french Nutri-Score for a generic product.
 score = Nutriscore::FR::SpecificScore.new(product_a)
 #<Nutriscore::FR::SpecificScore score=0
 #  positive_score=#<Nutriscore::FR::PositiveScore score=4
-#                    fruits_vegetables_legumes_nuts=0 fibres=0 proteins=4>
+#                    fruits_vegetables_nuts=0 fibres=0 proteins=4>
 #  negative_score=#<Nutriscore::FR::NegativeScore score=4
 #                    energy=1 fat_saturated=1 sugar=2 sodium=0>>
 score.score
@@ -72,6 +72,31 @@ Different categories can use different score classes:
 * `Nutriscore::FR::MineralWaterScore` for mineral water
 * `Nutriscore::FR::DrinksScore` for other drinks
 * `Nutriscore::FR::SpecificScore` for other food products
+
+## UK
+
+The UK has the same basis for computation, but it is used to determine
+whether a product can be advertised to children (it must not be less healthy).
+
+```ruby
+score = Nutriscore::EN::SpecificScore.new(product_a)
+score.score
+# => 0
+score.less_healthy?
+# => false
+```
+
+By default, the fibres measurement method is AOAC (which is preferred), but
+it is possible to use fibres values measured with the NSP method:
+
+```ruby
+# Acceptable values for the fibres_method are: :aoac and :nsp.
+score = Nutriscore::EN::SpecificScore.new(product_a, fibres_method: :nsp)
+```
+
+Different categories can use different score classes:
+* `Nutriscore::EN::SpecificScore` for food products
+* `Nutriscore::EN::DrinksScore` for drinks
 
 ## License
 
