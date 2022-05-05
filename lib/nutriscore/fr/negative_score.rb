@@ -37,7 +37,7 @@ module Nutriscore
           elsif v >  3 then  3
           elsif v >  2 then  2
           elsif v >  1 then  1
-          else                   0
+          else               0
           end
         end
       end
@@ -61,6 +61,7 @@ module Nutriscore
 
       def sodium
         score_value(@nutrients.sodium, 0..10) do |v|
+          v *= 1000 if v # comparison is in mg/100g
           if    v > 900 then 10
           elsif v > 810 then  9
           elsif v > 720 then  8

@@ -8,7 +8,7 @@ module Nutriscore
       include DrinksScoreClass
 
       def self.nutrient_keys
-        [:energy, :sugar, :fruits_vegetables]
+        [:energy, :sugar, :fvnp]
       end
 
       def energy
@@ -45,10 +45,10 @@ module Nutriscore
         end
       end
 
-      def fruits_vegetables
+      def fvnp
         # the text mentions % but here we use g/100ml
         # we'd need to either ask for %, ask for g/100g, or require a density ...
-        score_value(@nutrients.fruits_vegetables, 0..10) do |v|
+        score_value(@nutrients.fvnp, 0..10) do |v|
           if    v > 80 then 10
           elsif v > 60 then  4
           elsif v > 40 then  2

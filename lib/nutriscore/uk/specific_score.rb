@@ -7,10 +7,10 @@ module Nutriscore
     class SpecificScore < GeneralScore
       def score
         # 'If a food or drink scores 11 or more ‘A’ points then it cannot score points for protein
-        #  unless it also scores 5 points for fruit, vegetables and nuts.'
-        if @negative.score.min < 11 || @positive.fruits_vegetables_nuts.max >= 5
+        #  unless it also scores 5 points for fruit, vegetables, nuts and pulses.'
+        if @negative.score.min < 11 || @positive.fvnp.max >= 5
           @negative.score - @positive.score
-        elsif @negative.score.max >= 11 && @positive.fruits_vegetables_nuts.min < 5
+        elsif @negative.score.max >= 11 && @positive.fvnp.min < 5
           @negative.score - @positive.score_without_proteins
         else
           Range.new(

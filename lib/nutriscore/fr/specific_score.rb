@@ -6,9 +6,9 @@ module Nutriscore
     # this is for general products
     class SpecificScore < GeneralScore
       def score
-        if @negative.score.min < 11 || @positive.fruits_vegetables_nuts.max >= 5
+        if @negative.score.min < 11 || @positive.fvnp.max >= 5
           @negative.score - @positive.score
-        elsif @negative.score.max >= 11 && @positive.fruits_vegetables_nuts.min < 5
+        elsif @negative.score.max >= 11 && @positive.fvnp.min < 5
           @negative.score - @positive.score_without_proteins
         else
           Range.new(

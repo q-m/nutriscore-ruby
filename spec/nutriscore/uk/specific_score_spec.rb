@@ -17,7 +17,7 @@ describe Nutriscore::UK::SpecificScore do
       fat_saturated: 1.8,                #  g/100g
       sugar: 13.4,                       #  g/100g
       sodium: 0.1 * 1e-3,                #  g/100g
-      fruits_vegetables_nuts: 8,         #  g/100g (= weight-%)
+      fvnp: 8,                           #  g/100g (= weight-%)
       fibres: 0.6,                       #  g/100g
       proteins: 6.5,                     #  g/100g
     }}
@@ -32,7 +32,7 @@ describe Nutriscore::UK::SpecificScore do
       fat_saturated: 6.1,                #  g/100g
       sugar: 18.7,                       #  g/100g
       sodium: 60 * 1e-3,                 #  g/100g
-      fruits_vegetables_nuts: 0,         #  g/100g (= weight-%)
+      fvnp: 0,                           #  g/100g (= weight-%)
       fibres: 0,                         #  g/100g
       proteins: 3.6,                     #  g/100g
     }}
@@ -47,7 +47,7 @@ describe Nutriscore::UK::SpecificScore do
       fat_saturated: 0.4,                #  g/100g
       sugar: 3.6,                        #  g/100g
       sodium: 471 * 1e-3,                #  g/100g
-      fruits_vegetables_nuts: 0,         #  g/100g (= weight-%)
+      fvnp: 0,                           #  g/100g (= weight-%)
       fibres: 0.2,                       #  g/100g
       proteins: 0.3,                     #  g/100g
     }}
@@ -62,7 +62,7 @@ describe Nutriscore::UK::SpecificScore do
       fat_saturated: 1.4,                #  g/100g
       sugar: 35.7,                       #  g/100g
       sodium: 0 * 1e-3,                  #  g/100g
-      fruits_vegetables_nuts: 46,        #  g/100g (= weight-%)
+      fvnp: 46,                          #  g/100g (= weight-%)
       fibres: 4.8,                       #  g/100g
       proteins: 4.3,                     #  g/100g
     }}

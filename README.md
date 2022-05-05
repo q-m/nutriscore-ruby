@@ -26,9 +26,9 @@ was adopted in 2017 for use as a voluntary label on the packaging.
 In 2018, Belgium and Spain adopted the same scheme.
 
 Other countries are evaluating adopting the Nutri-Score as well, including
-The Netherlands. There is also a
-[European citizen's initiative](http://ec.europa.eu/citizens-initiative/public/initiatives/ongoing/details/2019/000008)
-to adopt it Europe-wide.
+The Netherlands. There was also a
+[European citizen's initiative](http://ec.europa.eu/citizens-initiative/public/initiatives/ongoing/details/2019/000008_en)
+to adopt it Europe-wide, but this has been withdrawn.
 
 ## Installation
 
@@ -39,27 +39,29 @@ gem install nutriscore
 ## Usage
 
 The input for all nutritional scores are a product category and nutritional values.
-Which nutrients are required depends on the product category.
+Which nutrients are required depends on the product category. Note that `fvnp` stands
+for the amount of fruits, vegetables, nuts and pulses (and, since Oct 2019, also
+rapeseed, walnuts and olive oils).
 
 ```ruby
 require 'nutriscore'
 
 # Fruit fromage frais
 product_a = {
-  energy: 459,                 # kJ/100g
-  fat_saturated: 1.8,          #  g/100g
-  sugar: 13.4,                 #  g/100g
-  sodium: 0.1 / 1000,          #  g/100g
-  fruits_vegetables_nuts: 8,   #  g/100g (= weight-%)
-  fibres: 0.6,                 #  g/100g
-  proteins: 6.5,               #  g/100g
+  energy: 459,          # kJ/100g
+  fat_saturated: 1.8,   #  g/100g
+  sugar: 13.4,          #  g/100g
+  sodium: 0.1,          #  g/100g
+  fvnp: 8,              #  g/100g (= weight-%)
+  fibres: 0.6,          #  g/100g
+  proteins: 6.5,        #  g/100g
 }
 
 # Compute the french Nutri-Score for a generic product.
 score = Nutriscore::FR::SpecificScore.new(product_a)
 #<Nutriscore::FR::SpecificScore score=0
 #  positive_score=#<Nutriscore::FR::PositiveScore score=4
-#                    fruits_vegetables_nuts=0 fibres=0 proteins=4>
+#                    fvnp=0 fibres=0 proteins=4>
 #  negative_score=#<Nutriscore::FR::NegativeScore score=4
 #                    energy=1 fat_saturated=1 sugar=2 sodium=0>>
 score.score.single

@@ -11,11 +11,11 @@ module Nutriscore
       end
 
       def self.nutrient_keys
-        [:fruits_vegetables_nuts, :fibres, :proteins]
+        [:fvnp, :fibres, :proteins]
       end
 
-      def fruits_vegetables_nuts
-        score_value(@nutrients.fruits_vegetables_nuts, 0..5) do |v|
+      def fvnp
+        score_value(@nutrients.fvnp, 0..5) do |v|
           if    v > 80 then 5
           elsif v > 60 then 2
           elsif v > 40 then 1
