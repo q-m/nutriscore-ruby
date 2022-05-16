@@ -97,6 +97,9 @@ Different categories can use different score classes:
 * `Nutriscore::FR::DrinksScore` for other drinks
 * `Nutriscore::FR::SpecificScore` for other food products
 
+Note that the score classes may use different nutrients (there is one additional nutrient,
+`fat_total`, used by `FatsScore`).
+
 ## UK
 
 The UK has the same basis for computation, but it is used to determine
@@ -122,8 +125,8 @@ score = Nutriscore::UK::SpecificScore.new(product_a, fibres_method: :nsp)
 ```
 
 Different categories can use different score classes:
-* `Nutriscore::EN::SpecificScore` for food products
-* `Nutriscore::EN::DrinksScore` for drinks
+* `Nutriscore::UK::SpecificScore` for food products
+* `Nutriscore::UK::DrinksScore` for drinks
 
 ## License
 
