@@ -41,6 +41,10 @@ module Nutriscore
           end
         end
       end
+
+      def score_without_proteins
+        (self.class.nutrient_keys - [:proteins]).map(&method(:public_send)).compact.reduce(&:+)
+      end
     end
   end
 end

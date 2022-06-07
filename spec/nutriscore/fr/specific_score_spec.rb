@@ -57,4 +57,20 @@ describe Nutriscore::FR::SpecificScore do
     its(:score) { is_expected.to eq(-2) }
     its(:score_class) { is_expected.to eq 'A' }
   end
+
+  # https://www.willys.se/produkt/Kottbullar-Mammas-100084061_ST
+  # a Questionmark researcher manually computed the scores
+  context 'Köttbullar Mammas (score without proteins)' do
+    let(:nutrients) {{
+      energy: 900,                        # kJ/100g
+      fat_saturated: 6,                   #  g/100g
+      sugar: 1,                           #  g/100g
+      fvnp: 0..40,                        #  g/100g (= weight-%) - manual estimate
+      fibres: 0.3,                        #  g/100g
+      proteins: 13,                       #  g/100g
+      sodium: 0.64,                       #  g/100g
+    }}
+    its(:score) { is_expected.to eq(14) }
+    its(:score_class) { is_expected.to eq 'D' }
+  end
 end
